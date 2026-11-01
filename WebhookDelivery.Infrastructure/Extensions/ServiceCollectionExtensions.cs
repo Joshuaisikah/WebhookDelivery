@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WebhookDelivery.Infrastructure.Data;
+using WebhookDelivery.Infrastructure.Services;
 
 namespace WebhookDelivery.Infrastructure.Extensions;
 
@@ -19,10 +20,14 @@ public static class ServiceCollectionExtensions
 
             services.AddDbContext<AppDbContext>(o =>
                 o.UseNpgsql(
-                    cs,
-                    npgsql => npgsql.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)
-                )
+                        cs,
+                        npgsql => npgsql.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)
+                    )
+                    .UseSnakeCaseNamingConvention()
             );
+            services.AddScoped<IApplicationService, ApplicationService>();
+            services.AddScoped<IWebhookService, WebhookService>();
+            services.AddScoped<IEventService, EventService>();
 
             return services;
         }
