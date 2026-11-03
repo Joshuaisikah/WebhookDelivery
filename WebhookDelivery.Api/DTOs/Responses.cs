@@ -17,3 +17,11 @@ public sealed record EventAcceptedResponse(
     string Type,
     DateTimeOffset CreatedAt
 );
+
+public sealed record WebhookStatusResponse(
+    Guid Id,
+    Guid ApplicationId,
+    string Url,
+    bool IsActive,
+    int CancelledDeliveries
+);

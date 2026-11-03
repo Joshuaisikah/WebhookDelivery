@@ -15,8 +15,31 @@ public static class ApplicationEndpoints
         group.MapPost("/", CreateApplication);
         group.MapPost("/{id:guid}/webhooks", CreateWebhook);
         group.MapPost("/{id:guid}/events", CreateEvent);
+        group.MapPatch("/{id:guid}/webhooks/{webhookId:guid}", UpdateWebhook);
 
         return app;
+    }
+
+    private static async Task<IResult> UpdateWebhook(
+        Guid id,
+        Guid webhookId,
+        UpdateWebhookRequest req,
+        IWebhookService svc,
+        CancellationToken ct
+    )
+    {
+        var r = await svc.SetActiveAsync(id, webhookId, req.IsActive!.Value, ct);
+        return r is null
+            ? Results.Problem(statusCode: 404, title: "Webhook not found")
+            : Results.Ok(
+                new WebhookStatusResponse(
+                    r.Webhook.Id,
+                    r.Webhook.ApplicationId,
+                    r.Webhook.Url,
+                    r.Webhook.IsActive,
+                    r.CancelledDeliveries
+                )
+            );
     }
 
     private static async Task<IResult> CreateApplication(

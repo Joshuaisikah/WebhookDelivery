@@ -2,4 +2,5 @@
   <Project Path="WebhookDelivery.Api/WebhookDelivery.Api.csproj" />
   <Project Path="WebhookDelivery.Infrastructure/WebhookDelivery.Infrastructure.csproj" />
   <Project Path="WebhookDelivery.Tests/WebhookDelivery.Tests.csproj" />
+  <Project Path="WebhookDelivery.Worker/WebhookDelivery.Worker.csproj" />
 </Solution>

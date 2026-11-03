@@ -72,7 +72,10 @@ public class DeliveryConfiguration : IEntityTypeConfiguration<Delivery>
                     "ck_deliveries_status",
                     "status IN ('pending','delivered','failed')"
                 );
-                t.HasCheckConstraint("ck_deliveries_attempt_count", "attempt_count >= 0");
+                t.HasCheckConstraint(
+                    "ck_deliveries_status",
+                    "status IN ('pending','delivered','failed','cancelled')"
+                );
             }
         );
 

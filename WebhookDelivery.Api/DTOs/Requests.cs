@@ -8,6 +8,12 @@ public sealed record CreateApplicationRequest
     [Required, StringLength(200, MinimumLength = 1)]
     public string? Name { get; init; }
 }
+public sealed record UpdateWebhookRequest
+{
+    [Required]
+    public bool? IsActive { get; init; }
+}
+
 
 public sealed record CreateWebhookRequest
 {

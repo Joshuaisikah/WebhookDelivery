@@ -126,9 +126,7 @@ namespace WebhookDelivery.Infrastructure.Migrations
 
                     b.ToTable("deliveries", null, t =>
                         {
-                            t.HasCheckConstraint("ck_deliveries_attempt_count", "attempt_count >= 0");
-
-                            t.HasCheckConstraint("ck_deliveries_status", "status IN ('pending','delivered','failed')");
+                            t.HasCheckConstraint("ck_deliveries_status", "status IN ('pending','delivered','failed','cancelled')");
                         });
                 });
 

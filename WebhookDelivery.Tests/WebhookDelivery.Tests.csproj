@@ -26,6 +26,8 @@
   <ItemGroup>
     <ProjectReference Include="..\WebhookDelivery.Api\WebhookDelivery.Api.csproj" />
     <ProjectReference Include="..\WebhookDelivery.Infrastructure\WebhookDelivery.Infrastructure.csproj" />
+    <!-- Build order only: worker tests launch the real Worker as a child process. -->
+    <ProjectReference Include="..\WebhookDelivery.Worker\WebhookDelivery.Worker.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
 </Project>
